@@ -1,26 +1,23 @@
-
 import java.util.ArrayList;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author user
- */
 public class Demo extends javax.swing.JFrame {
     DefaultTableModel model;
     
     public Demo() {
         initComponents();
+        populateTable();
+    }
+
+    public void populateTable() {
         model = (DefaultTableModel)tblCities.getModel();
+        model.setRowCount(0);
         try {
             ArrayList<City> cities = getCities();
             for(City city : cities)
@@ -84,6 +81,17 @@ public class Demo extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCities = new javax.swing.JTable();
+        txtSearch = new javax.swing.JTextField();
+        lblSearch = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
+        lblCountryCode = new javax.swing.JLabel();
+        lblDistrict = new javax.swing.JLabel();
+        lblPopulation = new javax.swing.JLabel();
+        tbxDistrict = new javax.swing.JTextField();
+        tbxPopulation = new javax.swing.JTextField();
+        tbxName = new javax.swing.JTextField();
+        tbxCountryCode = new javax.swing.JTextField();
+        btnAdd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,25 +127,148 @@ public class Demo extends javax.swing.JFrame {
             tblCities.getColumnModel().getColumn(4).setResizable(false);
         }
 
+        txtSearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+
+        lblSearch.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblSearch.setText("Arama ifadesi");
+
+        lblName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblName.setText("Şehir İsmi :");
+
+        lblCountryCode.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblCountryCode.setText("Ülke Kodu :");
+
+        lblDistrict.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblDistrict.setText("Bölge :");
+
+        lblPopulation.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblPopulation.setText("Nüfus :");
+
+        tbxDistrict.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        tbxPopulation.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        tbxName.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        tbxCountryCode.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+
+        btnAdd.setText("Ekle");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(lblSearch)
+                        .addGap(32, 32, 32)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblCountryCode)
+                                    .addComponent(lblName))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tbxName)
+                                    .addComponent(tbxCountryCode, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
+                                .addGap(95, 95, 95)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblDistrict)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(tbxDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblPopulation)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(tbxPopulation)))))))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(160, 160, 160)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSearch)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblName)
+                    .addComponent(lblDistrict)
+                    .addComponent(tbxDistrict, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tbxName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPopulation)
+                    .addComponent(lblCountryCode)
+                    .addComponent(tbxPopulation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tbxCountryCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addComponent(btnAdd)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        String searchKey = txtSearch.getText();
+        TableRowSorter<DefaultTableModel> tableRowSorter = new TableRowSorter<DefaultTableModel>(model);
+        tblCities.setRowSorter(tableRowSorter);
+        tableRowSorter.setRowFilter(RowFilter.regexFilter(searchKey));
+    }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        Connection connection = null;
+        DbHelper dbHelper = new DbHelper();
+        PreparedStatement statement = null;
+        try{
+            connection = dbHelper.getConnection();
+            String sql = "insert into city (Name, CountryCode, District, Population)"
+                    + "values (?,?,?,?)";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1,tbxName.getText());
+            statement.setString(2,tbxCountryCode.getText());
+            statement.setString(3,tbxDistrict.getText());
+            statement.setInt(4, Integer.valueOf(tbxPopulation.getText()));
+            int result = statement.executeUpdate();
+            populateTable();
+        }
+        catch(SQLException exception){
+            dbHelper.showErrorMessage(exception);
+        }
+        finally
+        {
+            try {
+                statement.close();
+                connection.close();
+            } catch (SQLException ex) {
+
+            }
+            
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,7 +306,18 @@ public class Demo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCountryCode;
+    private javax.swing.JLabel lblDistrict;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblPopulation;
+    private javax.swing.JLabel lblSearch;
     private javax.swing.JTable tblCities;
+    private javax.swing.JTextField tbxCountryCode;
+    private javax.swing.JTextField tbxDistrict;
+    private javax.swing.JTextField tbxName;
+    private javax.swing.JTextField tbxPopulation;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
