@@ -71,11 +71,22 @@
       <option name="presentableId" value="Default" />
       <updated>1732906344996</updated>
       <workItem from="1732906346093" duration="1898000" />
-      <workItem from="1732955539111" duration="1367000" />
+      <workItem from="1732955539111" duration="7329000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>95</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
