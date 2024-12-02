@@ -6,14 +6,8 @@
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
-
-	<bean id = "database" class = "springIntro.MsSqlCustomerDal">
-		<property name = "connectionString" value="Sql server string--"></property>
-	</bean>
-	
-	<bean id = "service" class="springIntro.CustomerManager">
-		<constructor-arg ref="database"/>
-	</bean>
+    
+    <context:component-scan base-package="com.springdemo"></context:component-scan>
 </beans>
 
 

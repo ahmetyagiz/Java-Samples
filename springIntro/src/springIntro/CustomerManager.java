@@ -1,6 +1,7 @@
 package springIntro;
 
-public class CustomerManager {
+public class CustomerManager implements ICustomerService
+{
 	
 	private ICustomerDal customerDal;
 	

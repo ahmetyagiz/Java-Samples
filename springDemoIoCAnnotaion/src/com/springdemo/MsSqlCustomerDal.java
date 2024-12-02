@@ -1,6 +1,9 @@
-package springIntro;
+package com.springdemo;
 
-public class CustomerDal implements ICustomerDal{
+import org.springframework.stereotype.Component;
+
+@Component("database")
+public class MsSqlCustomerDal implements ICustomerDal{
 	
 	String connectionString;
 	
@@ -11,10 +14,9 @@ public class CustomerDal implements ICustomerDal{
 	public void setConnectionString(String connectionString) {
 		this.connectionString = connectionString;
 	}
-	
+
 	public void add() {
 		System.out.println("Connection String : " + this.connectionString);
-		System.out.println("Oracle veritabanına eklendi");
-		
+		System.out.println("Ms Sql veritabanına eklendi");
 	}
 }

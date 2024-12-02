@@ -1,4 +1,4 @@
-package springIntro;
+package com.springdemo;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -8,10 +8,9 @@ public class Main {
 		ClassPathXmlApplicationContext context = 
 				new ClassPathXmlApplicationContext("applicationContext.xml");
 		
-		ICustomerService customerService =
-			 context.getBean("service", ICustomerService.class);
+		ICustomerDal customerDal = context.getBean("database", ICustomerDal.class);
 		
-		customerService.add();
+		customerDal.add();
 	}
 	
 	//IoC - Inversion of Control

@@ -1,6 +1,9 @@
-package springIntro;
+package com.springdemo;
 
-public class CustomerDal implements ICustomerDal{
+import org.springframework.stereotype.Component;
+
+//@Component("database")
+public class MySqlCustomerDal implements ICustomerDal{
 	
 	String connectionString;
 	
@@ -12,9 +15,10 @@ public class CustomerDal implements ICustomerDal{
 		this.connectionString = connectionString;
 	}
 	
+	@Override
 	public void add() {
 		System.out.println("Connection String : " + this.connectionString);
-		System.out.println("Oracle veritabanına eklendi");
-		
+		System.out.println("MySql veritabanına eklendi");
 	}
+
 }
