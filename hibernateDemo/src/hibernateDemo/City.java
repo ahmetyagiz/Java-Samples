@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class City {
 	@Id
 	@Column(name="ID")
-	private String id;
+	private int id;
 	
 	@Column(name="name")
 	private String name;
@@ -21,10 +21,10 @@ public class City {
 	@Column(name="population")
 	private int population;
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getName() {
