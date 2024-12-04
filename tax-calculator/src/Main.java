@@ -7,7 +7,7 @@ public class Main {
         System.out.print("Enter number: ");
         int gross = sc.nextInt();
 
-        double tax = ((double) (gross * 18) / 100);
+        double tax = ((double) gross * 18 / 100);
         double taxedValue = gross + tax;
 
         System.out.println("Gross: " + gross);
