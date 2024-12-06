@@ -7,9 +7,11 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.javacourse.hibernateAndJpa.Entities.City;
 
+@Repository
 public class HibernateCityDal implements ICityDal{
 
 	private EntityManager entityManager;

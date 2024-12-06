@@ -23,6 +23,10 @@ public class City {
 	@Column(name="population")
 	private int population;
 	
+	public City() {
+		
+	}
+	
 	public City(int id, String name, String countryCode, String district, int population) {
 		super();
 		this.id = id;
