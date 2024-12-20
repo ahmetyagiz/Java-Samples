@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Employee {
-	private String idString;
+	private String id;
 	
 	private String firstName;
 	

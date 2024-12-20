@@ -17,4 +17,8 @@ public class EmployeeService {
 		//kontrol yapılıyor
 		return employeeRepository.getAllEmployeeList();
 	}
+	
+	public Employee getEmployeeById(String id) {
+		return employeeRepository.getEmployeeById(id);
+	}
 }
