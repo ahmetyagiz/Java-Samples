@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ahmetyagiz.model.Employee;
+import com.ahmetyagiz.model.UpdateEmployeeRequest;
 
 @Repository
 public class EmployeeRepository {
@@ -74,12 +75,41 @@ public class EmployeeRepository {
 			}
 		}	
 		
-		if(deleteEmployee == null) {
-			return false;
+		if(deleteEmployee != null) {
+			employeeList.remove(deleteEmployee);
+			return true;
 		}
 		
-		employeeList.remove(deleteEmployee);
-		return true;
+		return false;
+	}
+	
+	public Employee findEmployeeById(String id) {
+		Employee findEmployee = null;
+		for (Employee employee : employeeList) {
+			if(employee.getId().equals(id)){
+				findEmployee = employee;
+				break;
+			}
+		}
+		return findEmployee;
+	}
+	
+	public Employee updateEmployee(String id, UpdateEmployeeRequest request) {
+		
+		Employee findEmployee = findEmployeeById(id);
+		
+		if(findEmployee != null){
+			deleteEmployee(id);
+			
+			Employee updatedEmployee = new Employee();
+			updatedEmployee.setId(id);
+			updatedEmployee.setFirstName(request.getFirstName());
+			updatedEmployee.setLastName(request.getLastName());
+			
+			employeeList.add(updatedEmployee);
+			return updatedEmployee;
+		}
+		return null;
 	}
 }
 
