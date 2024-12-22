@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.ahmetyagiz.dto.DtoStudent;
 import com.ahmetyagiz.dto.DtoStudentIU;
-import com.ahmetyagiz.entities.Student;
 
 public interface IStudentService {
 	

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ahmetyagiz.controller.IStudentController;
 import com.ahmetyagiz.dto.DtoStudent;
 import com.ahmetyagiz.dto.DtoStudentIU;
-import com.ahmetyagiz.entities.Student;
 import com.ahmetyagiz.services.IStudentService;
 
 @RestController
