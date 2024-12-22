@@ -33,13 +33,13 @@ public class StudentControllerImpl implements IStudentController{
 
 	@GetMapping(path = "/list")
 	@Override
-	public List<Student> getAllStudents() {
+	public List<DtoStudent> getAllStudents() {
 		return studentService.getAllStudents();
 	}
 
 	@GetMapping(path = "/list/{id}")
 	@Override
-	public Student getStudentById(@PathVariable(name = "id") Integer id) {
+	public DtoStudent getStudentById(@PathVariable(name = "id") Integer id) {
 	    return studentService.getStudentById(id);
 	}
 
@@ -51,9 +51,8 @@ public class StudentControllerImpl implements IStudentController{
 
 	@PutMapping(path = "/update/{id}")
 	@Override
-	public Student updateStudent(@PathVariable(name = "id") Integer id, @RequestBody Student updateStudent) {
-		// TODO Auto-generated method stub
-		return studentService.updateStudent(id, updateStudent);
+	public DtoStudent updateStudent(@PathVariable(name = "id") Integer id, @RequestBody DtoStudentIU dtoStudentIU) {
+		return studentService.updateStudent(id, dtoStudentIU);
 	}
 }
 
