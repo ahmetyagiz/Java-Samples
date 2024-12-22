@@ -7,11 +7,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ahmetyagiz.controller.IStudentController;
+import com.ahmetyagiz.dto.DtoStudent;
+import com.ahmetyagiz.dto.DtoStudentIU;
 import com.ahmetyagiz.entities.Student;
 import com.ahmetyagiz.services.IStudentService;
 
@@ -24,8 +27,8 @@ public class StudentControllerImpl implements IStudentController{
 	
 	@PostMapping(path = "/save")
 	@Override
-	public Student saveStudent(@RequestBody Student student) {
-		return studentService.saveStudent(student);
+	public DtoStudent saveStudent(@RequestBody DtoStudentIU dtoStudentIU) {
+		return studentService.saveStudent(dtoStudentIU);
 	}
 
 	@GetMapping(path = "/list")
@@ -44,6 +47,13 @@ public class StudentControllerImpl implements IStudentController{
 	@Override
 	public void deleteStudentById(@PathVariable(name = "id") Integer id) {
 		studentService.deleteStudentById(id);
+	}
+
+	@PutMapping(path = "/update/{id}")
+	@Override
+	public Student updateStudent(@PathVariable(name = "id") Integer id, @RequestBody Student updateStudent) {
+		// TODO Auto-generated method stub
+		return studentService.updateStudent(id, updateStudent);
 	}
 }
 
