@@ -18,7 +18,6 @@ public class StudentServiceImpl implements IStudentService{
 	
 	@Override
 	public Student saveStudent(Student student) {
-		// TODO Auto-generated method stub
 		return studentRepository.save(student);
 	}
 
@@ -36,8 +35,12 @@ public class StudentServiceImpl implements IStudentService{
 		else {
 			return null;
 		}
-		
 	    //return studentRepository.findById(id).get();
+	}
+
+	@Override
+	public void deleteStudentById(Integer id) {
+		studentRepository.deleteById(id);
 	}
 
 }
