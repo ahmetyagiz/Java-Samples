@@ -11,7 +11,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class DtoStudent {
 	//GET
-	
+
 	private String firstName;
 	
 	private String lastName;
