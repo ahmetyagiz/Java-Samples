@@ -1,9 +1,12 @@
 # Java files
 *.class
-*.log
 *.jar
 *.war
 *.ear
+
+# Ignore all XML files except pom.xml
+**/*.xml
+!pom.xml
 
 # IntelliJ IDEA files
 **/.idea/
@@ -15,11 +18,6 @@
 # Gradle directories
 **/.gradle/
 **/build/
-
-# Spring Boot specific
-**/*.properties
-**/*.yml
-**/*.xml
 
 # OS generated files
 **/.DS_Store
